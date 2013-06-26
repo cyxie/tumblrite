@@ -115,6 +115,7 @@ var kittens_earned = 0;
 var kittens_shown = 0;
 var warning_shown = false;
 var warning;
+var offset = 0;
 if (typeof localStorage == "undefined") warning = "#warning-no-ls"
 else warning = "#warning-ls";
 
@@ -155,7 +156,7 @@ function hide_warning(immediate) {
 }
 
 function show_kitten() {
-//  console.log("show");
+  console.log("show");
   hide_warning(true);
   kittens_shown++;
   $("#kittenFrame").css("background-image", "url(" + next_kitten.img_url + ")");
@@ -166,22 +167,25 @@ function show_kitten() {
 function fetch_next_kitten() {
   if (tmp = getParameterByName("search")) {
     search = tmp;
-    $("#titleKitten").html("<strike>Kitten!</strike>");
+    $("#titleKitten").html("<strike>Tumblrite!</strike>");
     $("#titleSearch").html("&nbsp;" + search + "!");
   } else {
     search = "kitten,cute";
   }
-
-  var tumblr_url = "http://api.tumblr.com/v2/blog/daepotato.tumblr.com/posts/photo?api_key=fuiKNFp9vQFvjLNvx4sUwti4Yb5yGutBN4Xh10LXZhhRKjWlV4";
+  var tumblr_url = "http://api.tumblr.com/v2/blog/daepotato.tumblr.com/posts/photo?api_key=fuiKNFp9vQFvjLNvx4sUwti4Yb5yGutBN4Xh10LXZhhRKjWlV4&offset="+offset+"&callback=?";
 
   $.getJSON(tumblr_url, function(data) {
     if (data.meta.msg == "OK") {
-      var i = Math.ceil(Math.random() * 100);
-      var photo = data.response.posts.photos[i];
-      next_kitten.img_url = photo.original_size.url;
-      next_kitten.page_url = photo.post_url;
+      var i = Math.ceil(Math.random() * 20);
+	  var post = data.response.posts[i];
+      next_kitten.page_url = post.post_url;
+      
+	  var photo = post.photos[0];
+	  next_kitten.img_url = photo.original_size.url;
+	  //next_kitten.img_url = "http://25.media.tumblr.com/0b11b3e0902263fccacfa593f334bca2/tumblr_moyto7QTnl1rnkj5ho1_500.jpg";
       next_kitten.alt = "help";
-      console.log(data);
+	  offset=Math.ceil(Math.random()*(data.response.total_posts-20));
+      console.log(offset);
       $("#nextKitten").attr("src", next_kitten.img_url);
     }
   });

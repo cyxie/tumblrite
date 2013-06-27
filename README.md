@@ -5,7 +5,7 @@ WARNING: First iteration, minimal, not yet hosted online. Because it's so minima
 
 INSTRUCTIONS:
 
-1. Download tumblrite.html (or copy and paste into a new HTML file, you can call it anything) IT'S THE ONLY FILE YOU NEED.
+1. Download tumblrite.html (copy and paste the RAW TEXT into a new HTML file, you can call it anything) IT'S THE ONLY FILE YOU NEED.
 
 2. In a text editor locate the line that includes "daepotato.tumblr.com" (there's only one line) via Ctrl+F or your eagle eyes or whatever and change that to the tumblr of your choice. Works only with photos so I'd suggest using an fyeah! or leaving it if you like Daehyun.
 
